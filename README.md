@@ -15,11 +15,18 @@ Run `rbxpack init` to set up the `rbxpack.json` config file, containg metadata a
 - Description: The project description, used in ORRH asset pack metadata and Novetus map metadata.
 - Author: The project author, used in ORRH asset pack metadata.
 - Version: The project version, used in ORRH asset pack metadata.
-- Clients: An array of clients the project works for, used in ORRH asset pack metadata and which clients to link to.[^orrhclients]
+- Clients: An array of clients the project works for, used in ORRH asset pack metadata and which clients to link to.
 - ProjectRbxl: The name of the rbxl file. For example, HappyHome.rbxl.
 - Links: An array of objects containing data about launchers to link to:
     - ClientsDir: The directory containing clients in the launcher.[^orrhclientsdir]
     - MapsDir: The directory containing maps in the launcher.
+
+#### Clients array syntax
+
+The Clients config field uses ORRH's syntax:
+- `CLIENT`: Only enables for CLIENT. For example, 2012L.
+- `!CLIENT`: Disables for CLIENT. For example, !2012L.
+- `*`: Enable for all clients.
 
 ### Link to launchers
 
@@ -38,9 +45,4 @@ Running `rbxpack build` will repack your game and assets for Novetus and ORRH's 
 - Compresses the RBXL to .rbxl.bz2 (for Novetus) and .rbxl.gz (for ORRH)
 - Compresses the generated assets folder to a .zip for distribution
 
-[^orrhclients] This uses ORRH's syntax:
-- `CLIENT`: Only enables for CLIENT. For example, 2012L.
-- `!CLIENT`: Disables for CLIENT. For example, !2012L.
-- `*`: Enable for all clients.
-
-[^orrhclientsdir] rbxpack is trying to get to the `content` directory of the client. ORRH stores its actual clients in subfolders of the Clients directory: `./data/clients/CLIENT/Player`, unlike Novetus. rbxpack will detect this, so just set the clients dir to ORRH's general clients directory and it will be fine.
+[^orrhclientsdir]: rbxpack is trying to get to the `content` directory of the client. ORRH stores its actual clients in subfolders of the Clients directory: `./data/clients/CLIENT/Player`, unlike Novetus. rbxpack will detect this, so use ORRH's general clients directory and don't worry.
