@@ -45,4 +45,4 @@ Running `rbxpack build` will repack your game and assets for Novetus and ORRH's 
 - Compresses the RBXL to .rbxl.bz2 (for Novetus) and .rbxl.gz (for ORRH)
 - Compresses the generated assets folder to a .zip for distribution
 
-[^orrhclientsdir]: rbxpack is trying to get to the `content` directory of the client. ORRH stores its actual clients in subfolders of the Clients directory: `./data/clients/CLIENT/Player`, unlike Novetus. rbxpack will detect this, so use ORRH's general clients directory and don't worry.
+[^orrhclientsdir]: rbxpack is trying to get to the `content` directory of the client. ORRH stores its actual clients in subfolders of the Clients directory: `./data/clients/CLIENT/Player`, unlike Novetus. rbxpack will detect this, so use ORRH's general clients directory and don't worry.npm

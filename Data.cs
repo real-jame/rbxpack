@@ -12,7 +12,6 @@ namespace Rbxpack
         public required string Version { get; set; }
         public required List<string> Clients { get; set; }
         public required string ProjectRbxl { get; set; }
-        public required List<LauncherLink> Links { get; set; }
     }
 
     // Represents the 'link' section of the config
@@ -40,6 +39,25 @@ namespace Rbxpack
             string path = Path.Combine(projectDirectory, "rbxpack.json");
 #pragma warning disable CS8603 // Possible null reference return.
             return JsonSerializer.Deserialize<Config>(File.ReadAllText(path));
+#pragma warning restore CS8603 // Possible null reference return.
+        }
+
+        public static List<LauncherLink> GetLinks(string projectDirectory = "")
+        {
+            if (projectDirectory == "")
+            {
+                projectDirectory = Directory.GetCurrentDirectory();
+            }
+
+            if (!FileExists(projectDirectory, "rbxpack.launcherlinks.json"))
+            {
+                AnsiConsole.MarkupLine($"[bold red]Error:[/] No launcher links config file found in directory {projectDirectory}. Please add links with 'rbxpack link add' first.");
+                throw new FileNotFoundException($"The 'rbxpack.launcherlinks.json' config file was not found in directory {projectDirectory}");
+            }
+
+            string path = Path.Combine(projectDirectory, "rbxpack.launcherlinks.json");
+#pragma warning disable CS8603 // Possible null reference return.
+            return JsonSerializer.Deserialize<List<LauncherLink>>(File.ReadAllText(path));
 #pragma warning restore CS8603 // Possible null reference return.
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Rbxpack.Application;
 using Rbxpack.Application.Link;
 using Spectre.Console;
@@ -9,6 +10,9 @@ var app = new CommandApp();
 
 app.Configure(config =>
 {
+    System.Console.OutputEncoding = Encoding.UTF8;
+    System.Console.InputEncoding = Encoding.UTF8;
+
     config.SetApplicationName("rbxpack");
 
     // config.SetExceptionHandler(ex =>
