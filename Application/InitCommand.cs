@@ -68,7 +68,8 @@ public class InitCommand : Command<InitCommand.Settings>
         File.WriteAllText(configPath, configJson);
         File.WriteAllText(linksPath, linksJson);
 
-        AnsiConsole.MarkupLine($"[green]{Emoji.Known.GreenHeart}[/] [bold]rbxpack.json[/] has been created successfully in [blue]{settings.ProjectDirectory}[/]. Have fun! [gray]If you're using Git (you should), make sure to add [bold]rbxpack.launcherlinks.json[/] to your gitignore.[/]");
+        // TODO: Fill in the gitignore command with the directory used here                                     
+        AnsiConsole.MarkupLine($"[green]{Emoji.Known.GreenHeart}[/] [bold]rbxpack.json[/] has been created successfully in [blue]{settings.ProjectDirectory}[/]. Have fun! [gray]If you're using Git (you should), make sure to add [bold]rbxpack.launcherlinks.json[/] to your gitignore. Or, run [bold]rbxpack gitignore[/] to create a gitignore file.[/]");
 
         return 0;
     }

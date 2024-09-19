@@ -21,6 +21,8 @@ app.Configure(config =>
     //     return -99;
     // });
 
+    config.AddCommand<BuildCommand>("build").WithDescription("Create sharable copies of the project that work on Novetus and ORRH launchers");
+    config.AddCommand<BuildCommand>("gitignore").WithDescription("Creates a gitignore file for an rbxpack project");
     config.AddCommand<InitCommand>("init").WithDescription("Start a new rbxpack project");
     config.AddBranch("link", branch =>
     {
@@ -28,7 +30,6 @@ app.Configure(config =>
         branch.AddCommand<LinkRemoveCommand>("remove").WithDescription("Unlink a launcher from the project");
         branch.AddCommand<LinkRefreshCommand>("refresh").WithDescription("Refresh a launcher's integration with the project files");
     });
-    config.AddCommand<BuildCommand>("build").WithDescription("Create sharable copies of the project that work on Novetus and ORRH launchers");
 });
 
 return app.Run(args);
