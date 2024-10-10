@@ -22,7 +22,7 @@ app.Configure(config =>
     // });
 
     config.AddCommand<BuildCommand>("build").WithDescription("Create sharable copies of the project that work on Novetus and ORRH launchers");
-    config.AddCommand<BuildCommand>("gitignore").WithDescription("Creates a gitignore file for an rbxpack project");
+    config.AddCommand<GitignoreCommand>("gitignore").WithDescription("Creates a gitignore file for an rbxpack project");
     config.AddCommand<InitCommand>("init").WithDescription("Start a new rbxpack project");
     config.AddBranch("link", branch =>
     {

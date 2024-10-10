@@ -13,12 +13,18 @@ public class InitCommand : Command<InitCommand.Settings>
         [Description("The project directory. Default is the current directory.")]
         [DefaultValue("")]
         public required string ProjectDirectory { get; set; }
+
+        [CommandOption("-f|--force")]
+        [Description("Force creation, even if it means overwriting files.")]
+        [DefaultValue(false)]
+        public required bool ForceCreate { get; set; }
     }
 
     public override int Execute(CommandContext context, Settings settings)
     {
         settings.ProjectDirectory = settings.ProjectDirectory != "" ? settings.ProjectDirectory : Directory.GetCurrentDirectory();
         AnsiConsole.MarkupLine($"[bold]rbxpack init[/] will create an rbxpack.json project config in [blue]{settings.ProjectDirectory}[/]. [gray]Press ? for info on the current prompt, or CTRL+C anytime to quit[/]");
+        // TODO: use ForceCreate to avoid overwriting, as done in gitignore command
 
         var projectName = AnsiConsole.Ask<string>("[green]?[/] Project name:");
         var friendlyName = AnsiConsole.Ask<string>("[green]?[/] Friendly name:");
@@ -68,8 +74,8 @@ public class InitCommand : Command<InitCommand.Settings>
         File.WriteAllText(configPath, configJson);
         File.WriteAllText(linksPath, linksJson);
 
-        // TODO: Fill in the gitignore command with the directory used here                                     
-        AnsiConsole.MarkupLine($"[green]{Emoji.Known.GreenHeart}[/] [bold]rbxpack.json[/] has been created successfully in [blue]{settings.ProjectDirectory}[/]. Have fun! [gray]If you're using Git (you should), make sure to add [bold]rbxpack.launcherlinks.json[/] to your gitignore. Or, run [bold]rbxpack gitignore[/] to create a gitignore file.[/]");
+        // TODO: Fill in the gitignore command with the directory used here                                    
+        AnsiConsole.MarkupLine($"[green]{Emoji.Known.GreenHeart}[/] [bold]rbxpack.json[/] was created successfully. Have fun! [gray]If you're using Git (you should), make sure to add [bold]rbxpack.launcherlinks.json[/] to your gitignore. Or, run [bold]rbxpack gitignore -d {settings.ProjectDirectory}[/] to create a gitignore file.[/]");
 
         return 0;
     }
