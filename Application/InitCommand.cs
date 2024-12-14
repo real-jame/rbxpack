@@ -44,8 +44,8 @@ public class InitCommand : Command<InitCommand.Settings>
             var addNewLink = AnsiConsole.Ask<string>("[green]?[/] Add a new launcher link? [gray]type anything to continue or leave blank to skip[/]", "");
             if (!string.IsNullOrEmpty(addNewLink))
             {
-                var clientsDir = AnsiConsole.Ask<string>("[green]?[/] Full path name of the launcher's clients directory");
-                var mapsDir = AnsiConsole.Ask<string>("[green]?[/] Full path name of the launcher's maps directory");
+                var clientsDir = AnsiConsole.Ask<string>("[green]?[/] Full path of the launcher's clients directory:");
+                var mapsDir = AnsiConsole.Ask<string>("[green]?[/] Full path of the launcher's maps directory:");
                 links.Add(new LauncherLink { ClientsDir = clientsDir, MapsDir = mapsDir });
             }
             else

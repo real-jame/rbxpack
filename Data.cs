@@ -89,8 +89,29 @@ namespace Rbxpack
             {
                 throw new FileNotFoundException($"The project rbxl file was not found in directory {projectDirectory}. Check your 'ProjectRbxl' setting in the config.");
             }
+        }
 
+        /// <summary>
+        /// Gets the actual folder containing the Roblox client in a launcher's client folder
+        /// Novetus and ORRH have different structures, so this method is necessary to get the correct folder.
+        /// </summary>
+        /// <param name="clientDirectory">The path to the client directory, should be directly under the launcher's "clients" folder</param>
+        /// <returns>The path to the actual client folder</returns>
+        public static string GetClient(string clientDirectory)
+        {
+            // SciLexer.dll is found in all old(?) Roblox clients, so we can use that to know if it's a Roblox client folder
+            if (FileExists(clientDirectory, "SciLexer.dll") {
+                return clientDirectory;
+            }
+            else if (DirectoryExists(clientDirectory, "Player") && FileExists(Path.Combine(clientDirectory, "bin"), "SciLexer.dll"))
+            {
+                return Path.Combine(clientDirectory, "Player");
+            }
+            else
+            {
+                throw new DirectoryNotFoundException($"The client directory {clientDirectory} does not appear to be a Roblox client folder.");
 
+            }
         }
     }
 }
